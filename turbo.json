@@ -15,10 +15,10 @@
     },
     "lint": {},
     "typecheck": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["gen", "^build"]
     },
     "test": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["gen", "^build"]
     },
     "clean": {
       "cache": false
