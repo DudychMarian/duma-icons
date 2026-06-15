@@ -61,7 +61,7 @@ apps/web/                    Next.js gallery   (browse / recolor / resize / down
 
 ## Requirements
 
-Node >= 18, pnpm 9 (`corepack enable` or `npm i -g pnpm@9`).
+Node >= 22, pnpm 9 (`corepack enable` or `npm i -g pnpm@9`).
 
 ## Commands
 

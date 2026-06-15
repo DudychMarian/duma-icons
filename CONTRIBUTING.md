@@ -64,7 +64,7 @@ with as much detail as possible (and a reference image if you have one).
 
 You'll need:
 
-- [Node.js 18+](https://nodejs.org)
+- [Node.js 22+](https://nodejs.org)
 - [pnpm 9](https://pnpm.io/installation) (`corepack enable` or `npm i -g pnpm@9`)
 
 After cloning the project, install dependencies (this also links the workspace
