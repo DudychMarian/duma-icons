@@ -1,0 +1,23 @@
+{
+  "name": "@duma/tooling",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./naming": "./src/naming.ts",
+    "./optimize": "./src/optimize.ts",
+    "./manifest": "./src/manifest.ts"
+  },
+  "scripts": {
+    "test": "node --import tsx --test \"src/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "svgo": "^3.3.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

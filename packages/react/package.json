@@ -1,0 +1,49 @@
+{
+  "name": "duma-icons-react",
+  "version": "0.1.0",
+  "description": "Hand-drawn icon set as React components.",
+  "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "author": "Marian Dudych",
+  "keywords": ["icons", "svg", "react", "hand-drawn", "duma-icons", "react-icons"],
+  "homepage": "https://github.com/marian-dudych/duma-icons#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marian-dudych/duma-icons.git",
+    "directory": "packages/react"
+  },
+  "bugs": "https://github.com/marian-dudych/duma-icons/issues",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "files": ["dist", "README.md"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "gen": "tsx scripts/build-react.ts",
+    "prebuild": "pnpm gen",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test \"src/**/*.test.tsx\"",
+    "clean": "rm -rf dist src/generated"
+  },
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "devDependencies": {
+    "@duma/tooling": "workspace:*",
+    "@types/react": "^18.3.12",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

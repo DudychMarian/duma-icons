@@ -1,0 +1,48 @@
+{
+  "name": "duma-icons",
+  "version": "0.1.0",
+  "description": "Hand-drawn icon set — framework-agnostic SVG data and metadata.",
+  "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "author": "Marian Dudych",
+  "keywords": ["icons", "svg", "hand-drawn", "duma-icons", "icon-set"],
+  "homepage": "https://github.com/marian-dudych/duma-icons#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marian-dudych/duma-icons.git",
+    "directory": "packages/core"
+  },
+  "bugs": "https://github.com/marian-dudych/duma-icons/issues",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "files": ["dist", "README.md"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./metadata": {
+      "types": "./dist/metadata.d.ts",
+      "import": "./dist/metadata.js",
+      "require": "./dist/metadata.cjs"
+    }
+  },
+  "scripts": {
+    "gen": "tsx scripts/build-icons.ts",
+    "prebuild": "pnpm gen",
+    "build": "tsup",
+    "test": "node --import tsx --test \"src/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist src/generated"
+  },
+  "devDependencies": {
+    "@duma/tooling": "workspace:*",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
