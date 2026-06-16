@@ -85,7 +85,7 @@ export function Gallery({
           </button>
           <div className="logo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.svg" alt="" width={26} height={26} className="logo-mark" />
+            <img src="/logo.svg" alt="duma-logo" width={26} height={26} className="logo-mark" />
             Duma
           </div>
           <a

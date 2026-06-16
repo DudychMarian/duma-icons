@@ -1,10 +1,74 @@
 import type { Metadata } from "next";
+import { SITE_URL, SITE_NAME, TITLE, DESCRIPTION, KEYWORDS } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Duma Icons",
-  description: "A hand-drawn icon set — browse, recolor, resize and download.",
-  icons: { icon: "/logo.svg" },
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: KEYWORDS,
+  authors: [{ name: "Marian Dudych" }],
+  creator: "Marian Dudych",
+  category: "technology",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: TITLE,
+    description: DESCRIPTION,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
+    apple: "/logo.svg",
+  },
+};
+
+// Structured data: helps Google understand the site is a free software/icon library.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      description: DESCRIPTION,
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: SITE_NAME,
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Any",
+      description: DESCRIPTION,
+      url: SITE_URL,
+      softwareVersion: "0.1.0",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      author: { "@type": "Person", name: "Marian Dudych" },
+      keywords: KEYWORDS.join(", "),
+    },
+  ],
 };
 
 // Resolve the saved theme (or the OS preference) and set it before first paint,
@@ -16,6 +80,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>{children}</body>
     </html>
