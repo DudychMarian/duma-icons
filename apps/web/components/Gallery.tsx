@@ -9,7 +9,7 @@ import { CategoryList } from "./CategoryList";
 import { IconGrid } from "./IconGrid";
 import { IconDetail } from "./IconDetail";
 
-const REPO_URL = "https://github.com/marian-dudych/duma-icons";
+const REPO_URL = "https://github.com/DudychMarian/duma-icons";
 
 export function Gallery({
   icons,
@@ -25,6 +25,8 @@ export function Gallery({
   const [theme, setThemeState] = useState<Theme>("light");
   const [selected, setSelected] = useState<IconMeta | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  // True once the user picks a color by hand — stops the theme from overwriting their choice.
+  const [colorCustomized, setColorCustomized] = useState(false);
 
   // The default icon color follows the active theme: white on dark, near-black on light.
   const themeColor = (t: Theme) => (t === "dark" ? "#ffffff" : "#0a0a0a");
@@ -36,6 +38,12 @@ export function Gallery({
     setColor(themeColor(resolved));
   }, []);
 
+  // A manual color pick from the Customizer; flags the color as customized.
+  function pickColor(next: string) {
+    setColor(next);
+    setColorCustomized(true);
+  }
+
   function setTheme(next: Theme) {
     setThemeState(next);
     document.documentElement.dataset.theme = next;
@@ -44,12 +52,14 @@ export function Gallery({
     } catch {
       // ignore storage failures (private mode, etc.)
     }
-    // Auto-update the icon fill so it stays visible against the themed canvas.
-    setColor(themeColor(next));
+    // Auto-update the icon fill so it stays visible against the themed canvas —
+    // but only while the user hasn't chosen their own color.
+    if (!colorCustomized) setColor(themeColor(next));
   }
 
   function reset() {
     setColor(themeColor(theme));
+    setColorCustomized(false);
     setSize(32);
   }
 
@@ -99,7 +109,7 @@ export function Gallery({
         <aside className={menuOpen ? "sidebar open" : "sidebar"}>
           <Customizer
             color={color}
-            setColor={setColor}
+            setColor={pickColor}
             size={size}
             setSize={setSize}
             theme={theme}
