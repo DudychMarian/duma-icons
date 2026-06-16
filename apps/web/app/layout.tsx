@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { SITE_URL, SITE_NAME, TITLE, DESCRIPTION, KEYWORDS } from "@/lib/site";
 import "./globals.css";
 
@@ -85,7 +86,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="371b4ce6-b71e-47b9-8b31-fdc84d035b60"
+        />
+      </body>
     </html>
   );
 }
